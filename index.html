@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>D-Day</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <h1>D-Day</h1>
+    <div id="d-day-container">
+      <div class="d-day-child-container">
+        <span>Year: </span>
+        <span id="year">0</span>
+      </div>
+      <div class="d-day-child-container">
+        <span>Day: </span>
+        <span id="days">0</span>
+      </div>
+      <div class="d-day-child-container">
+        <span>Hour: </span>
+        <span id="hours">0</span>
+      </div>
+      <div class="d-day-child-container">
+        <span>Minute: </span>
+        <span id="min">0</span>
+      </div>
+      <div class="d-day-child-container">
+        <span>Second: </span>
+        <span id="sec">0</span>
+      </div>
+    </div>
+    <div id="d-day-message"></div>
+    <div id="target-selector">
+      <input
+        id="target-year-input"
+        class="target-input"
+        placeholder="YYYY"
+        size="5"
+      />
+      -
+      <input
+        id="target-month-input"
+        class="target-input"
+        placeholder="MM"
+        size="5"
+      />
+      -
+      <input
+        id="target-date-input"
+        class="target-input"
+        placeholder="DD"
+        size="5"
+      />
+    </div>
+    <button onclick="starter()" class="btn">Start Count Down</button>
+    <button onclick="resetTimer()" class="btn">Timer Reset</button>
+  </body>
+</html>
