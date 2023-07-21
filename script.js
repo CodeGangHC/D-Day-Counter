@@ -33,6 +33,20 @@ const counterMaker = function (data) {
 
   const remaining = (targetDateWithOffset.getTime() - nowDate.getTime()) / 1000;
 
+  if (remaining <= 0) {
+    container.style.display = "none";
+    messageContainer.innerHTML = "<h3>Timer stopped.</h3>";
+    messageContainer.style.display = "flex";
+    setClearInterval();
+    return;
+  } else if (isNaN(remaining)) {
+    container.style.display = "none";
+    messageContainer.innerHTML = "<h3>Not a valid time</h3>";
+    messageContainer.style.display = "flex";
+    setClearInterval();
+    return;
+  }
+
   const remainingObj = {
     remaining_year: Math.floor(remaining / 3600 / 24 / 365),
     remaining_date: Math.floor(remaining / 3600 / 24) % 365,
@@ -52,25 +66,11 @@ const counterMaker = function (data) {
     }
   };
 
-  if (remaining <= 0) {
-    container.style.display = "none";
-    messageContainer.innerHTML = "<h3>Timer stopped.</h3>";
-    messageContainer.style.display = "flex";
-    setClearInterval();
-    return;
-  } else if (isNaN(remaining)) {
-    container.style.display = "none";
-    messageContainer.innerHTML = "<h3>Not a valid time</h3>";
-    messageContainer.style.display = "flex";
-    setClearInterval();
-    return;
-  } else {
-    let i = 0;
-    for (let tag of documentArr) {
-      const remainingTime = format(remainingObj[timeKeys[i]]);
-      document.getElementById(tag).textContent = remainingTime;
-      i++;
-    }
+  let i = 0;
+  for (let tag of documentArr) {
+    const remainingTime = format(remainingObj[timeKeys[i]]);
+    document.getElementById(tag).textContent = remainingTime;
+    i++;
   }
 };
 
@@ -90,7 +90,6 @@ const starter = function (targetDateInput) {
 };
 
 const setClearInterval = function () {
-  localStorage.removeItem("saved-date");
   for (let i = 0; i < intervalIdArr.length; i++) {
     clearInterval(intervalIdArr[i]);
   }
@@ -100,6 +99,7 @@ const resetTimer = function () {
   container.style.display = "none";
   messageContainer.innerHTML = "<h3>Please enter D-Day</h3>";
   messageContainer.style.display = "flex";
+  localStorage.removeItem("saved-date");
   setClearInterval();
 };
 
